@@ -9,6 +9,7 @@
     <color name="colorBackground">#89C7B6</color>
     <color name="colorSelected">#7998C9</color>
     <color name="colorWrong">#FF4081</color>
+    <color name="colorTransparent">#00000000</color>
 
     <!--<color name="colorBackground">#303F9F</color>
     <color name="colorSelected">#FBC02D</color>

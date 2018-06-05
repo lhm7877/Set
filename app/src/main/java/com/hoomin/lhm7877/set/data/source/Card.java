@@ -9,11 +9,19 @@ import android.widget.ImageView;
  */
 public class Card {
     private int imgageRes;
-    private boolean isChecked = false;
     private int number;
     private int shape;
     private int shading;
     private int color;
+    private int index;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     public String getTestResource() {
         return testResource;
@@ -40,14 +48,6 @@ public class Card {
 
     public void setImgageRes(int imgageRes) {
         this.imgageRes = imgageRes;
-    }
-
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        isChecked = checked;
     }
 
     public int getNumber() {

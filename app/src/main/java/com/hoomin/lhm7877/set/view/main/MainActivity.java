@@ -3,6 +3,7 @@ package com.hoomin.lhm7877.set.view.main;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private RecyclerView rvBoards;
     private ImageView ivDeck;
 
-    private Button button;
+    private Button btnHint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +33,21 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
 
         ivDeck = findViewById(R.id.ivDeck);
-        button = findViewById(R.id.button2);
+        btnHint = findViewById(R.id.btnHint);
         rvBoards = findViewById(R.id.rvBoards);
 
 //        mainCardsAdapter = new MainCardsAdapter(this);
-        cardsAdapter = new CardsAdapter();
+        rvBoards.setLayoutManager(new GridLayoutManager(this,3));
+        cardsAdapter = new CardsAdapter(this);
         rvBoards.setAdapter(cardsAdapter);
 
         mPresenter = new MainPresenter(MainRepository.getInstance(this), this);
         mPresenter.setMainCardsAdapterModel(cardsAdapter);
         mPresenter.setMainCardsAdapterView(cardsAdapter);
 
-        ivDeck.setOnClickListener(v -> {
-            mPresenter.addNewCards();
-        });
+        ivDeck.setOnClickListener(v -> mPresenter.addNewCards());
 
-        button.setOnClickListener(v -> {
+        btnHint.setOnClickListener(v -> {
 //            mainCardsAdapter.notifyAdapter();
         });
     }
@@ -61,11 +61,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public void setPresenter(@NonNull MainContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
-    }
-
-    @Override
-    public void changeEdgeColor(int i) {
-
     }
 
     @Override

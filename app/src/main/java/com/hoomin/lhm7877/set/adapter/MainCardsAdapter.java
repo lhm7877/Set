@@ -3,6 +3,7 @@ package com.hoomin.lhm7877.set.adapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -53,6 +54,21 @@ public class MainCardsAdapter extends FitGridAdapter implements CardsAdapterCont
     }
 
     @Override
+    public void showWrongAlert() {
+
+    }
+
+    @Override
+    public void resetSelectedViews(List<Card> selectedCardList) {
+
+    }
+
+    @Override
+    public void showSelectedCard(ImageView ivCard, Card selectedCard) {
+
+    }
+
+    @Override
     public void onBindView(int position, View itemView) {
         ImageView ivCard = itemView.findViewById(R.id.ivCard);
         Glide.with(itemView)
@@ -72,7 +88,7 @@ public class MainCardsAdapter extends FitGridAdapter implements CardsAdapterCont
                 if (selectedCardList.size() == 3) {
                     click3Items();
                 }
-                myOnItemClickListener.onItemClick(position);
+                myOnItemClickListener.onItemClick(position, ivCard);
             }
         });
     }
@@ -105,26 +121,39 @@ public class MainCardsAdapter extends FitGridAdapter implements CardsAdapterCont
         deckList.add(deckQueue.poll());
     }
 
+    @Override
+    public void addSelectedCardInfo(int position, ImageView ivCard, Card selectedCard) {
+    }
+
+    @Override
+    public List<Card> getSelectedCardList() {
+        return selectedCardList;
+    }
+
+    @Override
+    public Card getNewCard() {
+        return null;
+    }
+
+    @Override
+    public void removeCardFromDeckList(@NonNull Card cardToBeRemoved) {
+
+    }
+
+    @Override
+    public void setCardToDeckList(int index, @NonNull Card newCard) {
+
+    }
+
+    @Override
+    public void clearSelectedCardListInfo() {
+
+    }
+
     private void clickItem(int position, ImageView ivCard, Card card) {
-        if (card.isChecked()) {
-            card.setChecked(false);
-            selectedCardList.remove(card);
-            selectedViewList.remove(ivCard);
-            selectedIndexList.remove(Integer.valueOf(position));
-            ivCard.setBackground(context.getDrawable(android.R.color.transparent));
-        } else {
-            card.setChecked(true);
-            selectedCardList.add(card);
-            selectedViewList.add(ivCard);
-            selectedIndexList.add(position);
-            ivCard.setBackground(context.getDrawable(R.drawable.card_border));
-        }
     }
 
     private void click3Items() {
-        for (Card card : selectedCardList) {
-            card.setChecked(false);
-        }
         boolean isValid = Set.IsSetValid(selectedCardList.get(0), selectedCardList.get(1), selectedCardList.get(2));
         if (isValid) {
             for (int i = 0; i < selectedCardList.size(); i++) {
@@ -159,7 +188,7 @@ public class MainCardsAdapter extends FitGridAdapter implements CardsAdapterCont
             imageView.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
         }
 //        notifyAdapter();
-        myOnItemClickListener.onItem3Click(isValid);
+        myOnItemClickListener.onItem3Click(selectedCardList);
         selectedViewList.clear();
         selectedCardList.clear();
     }

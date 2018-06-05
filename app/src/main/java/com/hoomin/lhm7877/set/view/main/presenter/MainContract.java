@@ -11,7 +11,6 @@ import com.hoomin.lhm7877.set.adapter.contract.CardsAdapterContract;
  */
 public interface MainContract {
     interface View extends BaseView<Presenter>{
-        void changeEdgeColor(int i);
         void changeSize(int r, int c);
     }
 
@@ -19,5 +18,6 @@ public interface MainContract {
         void setMainCardsAdapterModel(CardsAdapterContract.Model adapterModel);
         void setMainCardsAdapterView(CardsAdapterContract.View adapterView);
         void addNewCards();
+
     }
 }
